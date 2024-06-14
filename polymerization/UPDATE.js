@@ -24,7 +24,7 @@ var emailWorkbook = 'EMAIL' // 邮箱表的名称
 // 分配置表名称
 var subConfigWorkbook=['aliyundrive_multiuser','52pojie','noteyoudao','wps','tieba',
 'wangyiyungame', 'smzdm', 'toollu', 'cake', 'tianrun', 
-'xifushe', 'ddmc', 'everphoto', 'btime','acfun','xmly', 'tonghua', 'en'];
+'xifushe', 'ddmc', 'everphoto', 'btime','acfun','xmly', 'tonghua', 'en', 'xiaomisports'];
 var workbook = [] // 存储已存在表数组
 
 // 表中激活的区域的行数和列数
@@ -57,6 +57,7 @@ var configContent=[
   ['acfun','AcFun','否','否'],
   ['xmly','喜马拉雅','否','否'],
   ['tonghua','ios游戏迷','否','否'],
+  ['xiaomisports','小米运动','否','是'],
 ]
 
 // PUSH表内容 		
@@ -125,6 +126,17 @@ var subConfigWps = [
   ['xxxxxxxx2', '否', '昵称2', '否']
 ]
 
+// 定制化分配置表内容，小米运动
+var subConfigXiaomisports = [
+  ['cookie(默认20个)','是否执行(是/否)','推送的昵称(可不填写)',
+    '账号(必填)','密码(必填)',
+    '总步数(必填,最大98000)','今日完成步数','完成时间戳(北京时间)',
+    '第一步(code)','第二步(login_token)','第二步(userid)', '第三步(app_token)',
+    '完成时间(北京时间)'
+    ],
+  ['xxxxxxxx1','否','13800138000', '13800138000','12345678', '98000','','', '','','','', ''],
+]
+
 // var mosaic = "xxxxxxxx" // 马赛克
 // var strFail = "否"
 // var strTrue = "是"
@@ -151,6 +163,15 @@ editConfigSheet(emailContent)
 createSubConfig()
 let length = subConfigWorkbook.length
 for(let i = 0; i < length; i++){
+  if (i== 0 ||
+      i== 8 ||
+      i== 11 ||
+      i== 12 ||
+      i== 13 ||
+      i== 3 ||
+      i== 18) {//特殊配置的表的下标
+    continue;
+  }
   ActivateSheet(subConfigWorkbook[i])
   editConfigSheet(subConfigContent)   // editSubConfig()
 }
@@ -172,7 +193,10 @@ ActivateSheet(subConfigWorkbook[13]) // 激活北京时间分配置表
 editConfigSheet(subConfigBtime)  
 
 ActivateSheet(subConfigWorkbook[3]) // 激活WPS分配置表
-editConfigSheet(subConfigWps)  
+editConfigSheet(subConfigWps)
+
+ActivateSheet(subConfigWorkbook[18]) // 激活小米运动分配置表
+editConfigSheet(subConfigXiaomisports)  
 
 
 // 判断表格行列数，并记录目前已写入的表格行列数。目的是为了不覆盖原有数据，便于更新
