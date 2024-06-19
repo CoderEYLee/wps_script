@@ -21,6 +21,7 @@ var jsonPush = [
   { name: "email", key: "xxxxxx", flag: "0" },
   { name: "dingtalk", key: "xxxxxx", flag: "0" },
   { name: "discord", key: "xxxxxx", flag: "0" },
+  { name: "feishu", key: "xxxxxx", flag: "0" },
 ]; // 推送数据，flag=1则推送
 var jsonEmail = {
   server: "",
@@ -126,6 +127,8 @@ function push(message) {
           dingtalk(message, key);
         } else if (name == "discord") {
           discord(message, key);
+        } else if (name == "feishu") {
+          feishu(message, key);
         }
       }
     }
@@ -252,6 +255,23 @@ function discord(message, key) {
   //console.log(resp.text())
   sleep(5000);
 }
+
+// 推送feishu机器人
+function feishu(message, key) {
+  let resp = HTTP.post("https://open.feishu.cn/open-apis/bot/v2/hook/" + key, {
+              msg_type: 'text',
+              content: {
+                text: message
+              },
+            }).json();
+  let code = resp.code;
+  if (code != 0) {
+    return;
+  }
+
+  sleep(5000);
+}
+
 function sleep(d) {
   for (var t = Date.now(); Date.now() - t <= d; );
 }

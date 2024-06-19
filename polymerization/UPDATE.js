@@ -16,7 +16,7 @@
 
 
 // 定制化分配置表:
-// 阿里云盘（多用户版）、像素蛋糕、叮咚买菜、时光相册、北京时间、WPS
+// 阿里云盘（多用户版）、像素蛋糕、叮咚买菜、时光相册、北京时间、WPS、xiaomisports
 
 var confiWorkbook = 'CONFIG'  // 主配置表名称
 var pushWorkbook = 'PUSH' // 推送表的名称
@@ -69,6 +69,7 @@ var pushContent=[
   ['email', '若要邮箱发送，请配置EMAIL表', '否'],
   ['dingtalk', 'xxxxxxxx', '否'],
   ['discord', '请填入镜像webhook链接,自行处理Query参数', '否'],
+  ['feishu', '请填入飞书机器人的webhook中=号后面的值', '否'],
 ]
 
 // email表内容
